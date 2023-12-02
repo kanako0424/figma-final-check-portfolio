@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- figmaから画像をダウンロードするときは1xじゃなくて5x（5倍の解像度）にして
+ダウンロードしました。なんで5倍なのかと聞かれると適当としか言えません。
+共同開発する時は画像の解像度も気を配ると、より洗練されたサイトになると思います -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,21 +11,25 @@
 </head>
 
 <body>
+    <!-- ヘッダーを作成する -->
     <header>
         <div class="button-wrapper">
             <div class="openbtn1"><span></span><span></span><span></span></div>
         </div>
+        <!-- sp：SmartPhoneの略。画面幅がスマホのサイズの時だけ表示する -->
         <ul class="sp-menu display">
             <li>Works</li>
             <li>Blog</li>
             <li>Contact</li>
         </ul>
+        <!-- pc：PersonalComputerの略。画面幅がPCのサイズの時だけ表示する -->
         <ul class="pc-menu">
             <li>Works</li>
             <li>Blog</li>
             <li>Contact</li>
         </ul>
     </header>
+    <!-- プロフィール画像とタイトルの部分 -->
     <section class="profile">
         <div class="profile-img">
             <img src="img/profile.png" alt="">
@@ -36,6 +42,7 @@
             <button class="download-button">Download Resume</button>
         </div>
     </section>
+    <!-- Recent Postの部分。クラス名は英語なので、複数形と単数系の使い分けをするとよい -->
     <section class="recent-posts">
         <div class="recent-posts-titles">
             <h2 class="recent-post-title">Recent posts</h2>
@@ -62,6 +69,7 @@
             </div>
         </div>
     </section>
+    <!-- Featured Worksの部分。複数形と単数系の使い分けをするとよい -->
     <section class="featured-works">
         <h2 class="">Featured works</h2>
         <div class="work">
@@ -101,6 +109,10 @@
             </div>
         </div>
     </section>
+    <!-- フッター
+        クラス名のd-flexは、cssにはこういう書き方もあるんだよということを示すためにつけています。
+        bootstrapみたいな使い方です。
+        繰り返し使う要素やcssをJavaScriptで制御するときに便利な書き方です。 -->
     <footer>
         <div class="social-icons d-flex">
             <img src="img/fb.png" alt="facebook" class="social-icon">
@@ -110,7 +122,14 @@
         </div>
         <div class="copyright txt-center">Copyright &copy; 2020 All rights reserved</div>
     </footer>
+    <!-- JavaScriptのライブラリであるjQueryを使用するための一行 -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="  crossorigin="anonymous"></script>
+    <!-- JavaScriptでメニューボタンの制御。
+        メニューボタンをクリックするとメニューの中のリストが表示されて、
+        もう一度クリックするとメニューの中のリストが非表示になります。
+        クリックした時のメニューのアイコンのデザインの変化はCSSで書いています。
+        もちろんこの方法は「メニュー CSS」とかで検索して調べました。
+        詳しくは、cssの .openbtn1 の部分を見てください -->
     <script>
         $(".openbtn1").click(function () {
             $(this).toggleClass('active');

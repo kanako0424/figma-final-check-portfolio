@@ -1,4 +1,5 @@
-/* 初期化 */
+/* 初期化。ブラウザによってmarginなどの初期設定の大きさがバラバラなので、
+一旦リセットしておきます。 */
 html {
     scroll-behavior: smooth;
     font-size: 62.5%;
@@ -30,22 +31,38 @@ img {
     width: 100%;
 }
 
-/* 部品 */
+/* 汎用的に使える部品として使うクラスのCSSを定義。 */
 
+/* フレックスボックスを作るための定義。
+大体justify-contentとalign-itemsもcenterにしがちなので先に定義しておく */
 .d-flex {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* 非表示にするためのCSS。
+透明マントみたいな役割。
+非表示にするためのCSSなのに「表示する」というクラス名にしているのが
+我ながら紛らわしいので、
+共同開発するときは"display-none"とかの方が良いと思われる */
 .display {
     display: none;
 }
 
+/* ブロック要素のテキストを真ん中にするためのクラス */
 .txt-center {
     text-align: center;
 }
 
+
+/* ここからはそれぞれのセクションに適用するCSSを書いていく。
+モバイルファーストで書きたいので、前半はスマホ用の幅で書ている。
+PCとスマホのどちらからCSSを書くかはサイトの目的やチームによって異なるのでその都度決定しましょう。
+また、どの場所のCSSかわかりやすいようにCSSのシートにはコメントを残すと良いと思います。
+特にPC版はスマホ版に適用されたCSSを部分的に修正するだけなので、
+そのCSSがどのセクションのCSSなのか迷子になりがちです。
+ */
 
 /* header */
 
@@ -54,6 +71,7 @@ header {
     height: 50px;
 }
 
+/* スマホ用のCSSなのでpc-menuは非表示にしておく */
 header .pc-menu {
     display: none;
 }
@@ -65,7 +83,7 @@ header .sp-menu {
     background-color: #fff;
     top: 50px;
     right: 0px;
-    transition: all .4s;/*アニメーションの設定*/
+    transition: all .4s; /*アニメーションの設定。メニューのアイコンのCSSの書き方をググったときに出てきたやり方を適用。*/
 }
 .sp-menu li {
     padding-bottom: 15px;
@@ -76,6 +94,7 @@ header .sp-menu {
     right: 10px;
 }
 
+/* メニューのアイコンのCSSの書き方を検索して、コピペした部分。 */
 .openbtn1{
     position: relative; /*ボタン内側の基点となるためrelativeを指定*/
     background:#FFF;
@@ -84,51 +103,52 @@ header .sp-menu {
       height:50px;
     border-radius: 5px;
   }
-  
-  /*ボタン内側*/
-  .openbtn1 span{
-      display: inline-block;
-      transition: all .4s;/*アニメーションの設定*/
-      position: absolute;
-      left: 14px;
-      height: 1.5px;
-      border-radius: 2px;
-      background: #21243D;
-      width: 45%;
-    }
-  
-  .openbtn1 span:nth-of-type(1) {
-    top:15px; 
-  }
-  
-  .openbtn1 span:nth-of-type(2) {
-    top:23px;
-  }
-  
-  .openbtn1 span:nth-of-type(3) {
-    top:31px;
-  }
-  
-  /*activeクラスが付与されると線が回転して×に*/
-  
-  .openbtn1.active span:nth-of-type(1) {
-      top: 18px;
-      left: 18px;
-      transform: translateY(6px) rotate(-45deg);
-      width: 30%;
-  }
-  
-  .openbtn1.active span:nth-of-type(2) {
-    opacity: 0;/*真ん中の線は透過*/
-  }
-  
-  .openbtn1.active span:nth-of-type(3){
-      top: 30px;
-      left: 18px;
-      transform: translateY(-6px) rotate(45deg);
-      width: 30%;
-  }
 
+/*ボタン内側*/
+.openbtn1 span{
+    display: inline-block;
+    transition: all .4s;/*アニメーションの設定*/
+    position: absolute;
+    left: 14px;
+    height: 1.5px;
+    border-radius: 2px;
+    background: #21243D;
+    width: 45%;
+}
+
+.openbtn1 span:nth-of-type(1) {
+top:15px; 
+}
+
+.openbtn1 span:nth-of-type(2) {
+top:23px;
+}
+
+.openbtn1 span:nth-of-type(3) {
+top:31px;
+}
+
+/*activeクラスが付与されると線が回転して×に*/
+
+.openbtn1.active span:nth-of-type(1) {
+    top: 18px;
+    left: 18px;
+    transform: translateY(6px) rotate(-45deg);
+    width: 30%;
+}
+
+.openbtn1.active span:nth-of-type(2) {
+opacity: 0;/*真ん中の線は透過*/
+}
+
+.openbtn1.active span:nth-of-type(3){
+    top: 30px;
+    left: 18px;
+    transform: translateY(-6px) rotate(45deg);
+    width: 30%;
+}
+
+/* ↑ここまでがググってコピペした部分 */
 
 ul {
     list-style: none;
@@ -144,12 +164,19 @@ header li {
 .profile {
     padding: 0 24px;
 }
+
+/* .profile-img img のセレクタでwidthを指定するので
+.profile-img ではwidthを指定する必要がない。 */
 .profile-img {
+    width: fit-content;
+    margin: auto;
     margin-top: 33px;
     margin-bottom: 34px;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: -5px 13px #EDF7FA;
+    border-radius: 50%;
 }
 
 .profile-img img {
@@ -190,6 +217,7 @@ h1 {
 }
 
 h2 {
+    /* ここでは、フレックスボックを横並びにするためではなく、中央揃えにするために使用している */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -202,6 +230,7 @@ h2 {
     background-color: #EDF7FA;
 }
 
+/* スマホバージョンの時はview-allが非表示なので非表示にする */
 .view-all {
     display: none;
 }
@@ -222,6 +251,10 @@ h3 {
     margin-bottom: 12px;
 }
 
+/* paramsはパラメータ（単：parameter, 複:parameters）の略。
+パラメータは、引数、設定値などの意味を持つ。日付やカテゴリー名を総称した。
+似た言葉でプロパティ（単：proterty, 複：properties, propsと略すこともある）という単語もあるので、
+recent-post-propsとしてもよいと思う。 */
 .recent-post-params {
     margin-bottom: 19px;
 }
@@ -268,11 +301,11 @@ h3 {
     margin-right: 22px;
     margin-bottom: 24px;
 }
+
 .work-category {
     color: #8695A4;
     height: 25px;
     margin-bottom: 24px;
-
 }
 
 footer {
@@ -287,12 +320,12 @@ footer {
 
 .social-icons img {
     width: 30px;
-    height: auto;
+    height: auto; /*autoでいいかはちゃんと確認していない。画像のサイズが合っていればautoで良いと思うが、画像が規定のサイズではない場合は指定する必要があると思う*/
 }
 
 
 
-/* pc版 */
+/* PC版のCSSを書く */
 @media screen and (min-width: 600px) {
 
     header, section, footer {
@@ -332,6 +365,7 @@ footer {
 
     .profile-img {
         margin: 0px;
+
     }
 
     .profile-img img {
@@ -341,13 +375,22 @@ footer {
     .profile-txt {
         text-align: left;
         max-width: 500px;
-        margin-right: 10%;
+        margin-right: 10%; 
+        /*margin-rightが10%であるというは私の解釈。
+        figmaでは115pxとなっているが、私が実際にこのサイトを見るとき、
+        相対指定（%）の方がどんな画面幅の時でも美しいと思ったから。
+        これは共同開発者やデザイナーと相談して決めるべき。
+        10%の理由は、figmaのキャンバスが1152pxで、この部分の隙間が115pxだったから。
+        この点からも、この隙間を115pxで絶対指定するよりも10%で相対指定する方が
+        デザイナーの意向を反映していると解釈した。
+        */
     }
 
     /* recent posts */
     .recent-posts {
         max-width: 100%;
     }
+
     .recent-posts-wrapper {
         max-width: 856px;
         margin: 0 auto;
@@ -356,6 +399,7 @@ footer {
         align-items: center;
         
     }
+
     .recent-post {
         height: 295px;
         width: 49%;
@@ -378,19 +422,23 @@ footer {
         font-weight: 400;
         height: 60px;
     }
+
     .view-all {
         display: inline;
         color: #00A8CC;
     }
-    /* featured-work */
+
+    /* featured works */
     .work {
         display: flex;
     }
+
     .work img {
         width: 246px;
         height: auto;
         margin-right: 18px;
     }
+
     .work h3 {
         margin: 0px 0px 16px;
     }
